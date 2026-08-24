@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dra. Carla Ruiz Díaz — Odontología Montevideo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="mainNav">
+  <a href="#inicio" class="nav-logo">Dra. Carla Ruiz Díaz<span>Odontología · Montevideo</span></a>
+  <ul class="nav-center">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#asistente">Asistente</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Pedir Turno</a>
+  <button class="hamburger" onclick="toggleMob()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMob()">✕</button>
+  <a href="#servicios" onclick="toggleMob()">Servicios</a>
+  <a href="#proceso" onclick="toggleMob()">Proceso</a>
+  <a href="#asistente" onclick="toggleMob()">Asistente</a>
+  <a href="#ubicacion" onclick="toggleMob()">Ubicación</a>
+  <a href="#contacto" onclick="toggleMob()" style="color:var(--sage2)">Pedir Turno →</a>
+</div>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-video-wrap">
+    <img
+      id="heroBg"
+      src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1800&q=85&auto=format"
+      alt="Consultorio dental profesional"
+    />
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Odontología profesional · Montevideo</div>
+    <h1 class="hero-title">
+      <span class="line"><span>Tu sonrisa,</span></span>
+      <span class="line"><span>nuestro <em>arte.</em></span></span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">Especialista en ortodoncia, blanqueamiento y estética dental. Atención personalizada con tecnología de vanguardia en Montevideo.</p>
+      <div class="hero-ctas">
+        <a href="#contacto" class="btn-primary">Pedir turno</a>
+        <a href="#servicios" class="btn-outline">Ver tratamientos</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll<div class="scroll-line"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner" id="marqueeInner">
+    <div class="marquee-item">Ortodoncia</div>
+    <div class="marquee-item">Blanqueamiento Dental</div>
+    <div class="marquee-item">Brackets Metálicos y Estéticos</div>
+    <div class="marquee-item">Implantes Dentales</div>
+    <div class="marquee-item">Odontología Familiar</div>
+    <div class="marquee-item">Urgencias Dentales</div>
+    <div class="marquee-item">Radiografías Digitales</div>
+    <div class="marquee-item">Ortodoncia</div>
+    <div class="marquee-item">Blanqueamiento Dental</div>
+    <div class="marquee-item">Brackets Metálicos y Estéticos</div>
+    <div class="marquee-item">Implantes Dentales</div>
+    <div class="marquee-item">Odontología Familiar</div>
+    <div class="marquee-item">Urgencias Dentales</div>
+    <div class="marquee-item">Radiografías Digitales</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="sobre" class="section about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-label">Sobre la doctora</div>
+        <h2 class="about-title">Más de 8 años<br>transformando <em>sonrisas</em></h2>
+        <p class="about-text">Soy odontóloga especializada en ortodoncia y estética dental, con formación en las técnicas más modernas del mercado. Me apasiona devolver la confianza a mis pacientes a través de su sonrisa.</p>
+        <p class="about-text">Cada tratamiento es único. Por eso trabajo de forma personalizada, escuchando tus objetivos y diseñando un plan a tu medida.</p>
+        <div class="about-stats">
+          <div>
+            <div class="stat-big">500+</div>
+            <div class="stat-label">Pacientes atendidos</div>
+          </div>
+          <div>
+            <div class="stat-big">8+</div>
+            <div class="stat-label">Años de experiencia</div>
+          </div>
+          <div>
+            <div class="stat-big">100%</div>
+            <div class="stat-label">Dedicación personal</div>
+          </div>
+          <div>
+            <div class="stat-big">3</div>
+            <div class="stat-label">Especialidades</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="position:relative">
+        <img
+          src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=85&auto=format"
+          alt="Dra. Carla Ruiz Díaz - Odontóloga"
+          style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block"
+        />
+        <div class="about-badge">
+          <span class="about-badge-num">MVD</span>
+          <span class="about-badge-label">Montevideo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="section servicios">
+  <div class="section-inner">
+    <div class="servicios-header reveal">
+      <div>
+        <div class="about-label">Tratamientos</div>
+        <h2 class="about-title" style="margin-bottom:0">Servicios <em>especializados</em></h2>
+      </div>
+      <a href="#contacto" class="btn-outline" style="white-space:nowrap">Consultar turno →</a>
+    </div>
+    <div class="servicios-list">
+      <div class="servicio-item reveal">
+        <div class="serv-num">01</div>
+        <div class="serv-info">
+          <h3>Colocación de Brackets</h3>
+          <p>Brackets metálicos y estéticos de alta calidad. Resultados precisos y duraderos.</p>
+        </div>
+        <span class="serv-tag">Ortodoncia</span>
+      </div>
+      <div class="servicio-item reveal">
+        <div class="serv-num">02</div>
+        <div class="serv-info">
+          <h3>Blanqueamiento Dental</h3>
+          <p>Sistema profesional con resultados visibles desde la primera sesión. Sin dañar el esmalte.</p>
+        </div>
+        <span class="serv-tag">Estética</span>
+      </div>
+      <div class="servicio-item reveal">
+        <div class="serv-num">03</div>
+        <div class="serv-info">
+          <h3>Ortodoncia Completa</h3>
+          <p>Tratamientos para niños, adolescentes y adultos. Corrección de mordida y maloclusiones.</p>
+        </div>
+        <span class="serv-tag">Especialidad</span>
+      </div>
+      <div class="servicio-item reveal">
+        <div class="serv-num">04</div>
+        <div class="serv-info">
+          <h3>Implantes Dentales</h3>
+          <p>Solución permanente con implantes de titanio. Acabado natural y funcional.</p>
+        </div>
+        <span class="serv-tag">Cirugía</span>
+      </div>
+      <div class="servicio-item reveal">
+        <div class="serv-num">05</div>
+        <div class="serv-info">
+          <h3>Odontología Familiar</h3>
+          <p>Limpiezas, controles preventivos y cuidado dental para toda la familia.</p>
+        </div>
+        <span class="serv-tag">Familiar</span>
+      </div>
+      <div class="servicio-item reveal">
+        <div class="serv-num">06</div>
+        <div class="serv-info">
+          <h3>Urgencias Dentales</h3>
+          <p>Atención prioritaria para dolor, fracturas e infecciones. Respondemos rápido.</p>
+        </div>
+        <span class="serv-tag">Urgencias</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="galeria">
+  <div class="galeria-grid">
+    <div class="gal-item gal-tall">
+      <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80&auto=format" alt="Consultorio dental"/>
+      <div class="gal-overlay"><span>Consultorio moderno</span></div>
+    </div>
+    <div class="gal-col">
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80&auto=format" alt="Ortodoncia"/>
+        <div class="gal-overlay"><span>Ortodoncia</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=80&auto=format" alt="Blanqueamiento dental"/>
+        <div class="gal-overlay"><span>Blanqueamiento</span></div>
+      </div>
+    </div>
+    <div class="gal-item gal-tall">
+      <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&q=80&auto=format" alt="Atención paciente"/>
+      <div class="gal-overlay"><span>Atención personalizada</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO SECTION -->
+<div class="video-section">
+  <div class="video-wrap">
+    <video autoplay muted loop playsinline id="sectionVideo">
+      <source src="https://cdn.prod.website-files.com/663f932e6aff4cbce5a4f4b7%2F6647946f61e785db2d703f32_4490547-uhd_3840_2160_25fps-transcode.mp4" type="video/mp4"/>
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+  <div class="video-content reveal">
+    <p class="video-quote">"Una sonrisa saludable es el reflejo de una <em>vida plena</em>."</p>
+    <p class="video-author">— Dra. Carla Ruiz Díaz</p>
+    <a href="#contacto" class="btn-primary" style="margin-top:2rem;display:inline-block">Pedir turno</a>
+  </div>
+  <button class="video-pause-btn" id="videoPauseBtn" onclick="toggleVideo()" aria-label="Pausar video">
+    <svg id="pauseIcon" viewBox="0 0 24 24" width="20" height="20" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    <svg id="playIcon" viewBox="0 0 24 24" width="20" height="20" fill="white" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+  </button>
+</div>
+
+<!-- PROCESO -->
+<section id="proceso" class="section proceso">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="proceso-label">Cómo trabajamos</div>
+      <h2 class="proceso-title">Un proceso pensado<br>para <em>cada paciente</em></h2>
+    </div>
+    <div class="proceso-steps">
+      <div class="paso reveal">
+        <div class="paso-num">01</div>
+        <h4>Consulta inicial</h4>
+        <p>Evaluamos tu salud bucal y escuchamos tus objetivos. Sin compromiso, sin costo.</p>
+      </div>
+      <div class="paso reveal" style="transition-delay:0.1s">
+        <div class="paso-num">02</div>
+        <h4>Diagnóstico</h4>
+        <p>Radiografías digitales y análisis completo para diseñar el plan ideal para tu caso.</p>
+      </div>
+      <div class="paso reveal" style="transition-delay:0.2s">
+        <div class="paso-num">03</div>
+        <h4>Tratamiento</h4>
+        <p>Comenzamos con controles periódicos para seguir tu progreso paso a paso.</p>
+      </div>
+      <div class="paso reveal" style="transition-delay:0.3s">
+        <div class="paso-num">04</div>
+        <h4>Tu sonrisa</h4>
+        <p>Resultado final con indicaciones de mantenimiento para que dure toda la vida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="section testimonios">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="about-label" style="color:var(--sage2)">Testimonios</div>
+      <h2 class="about-title">Lo que dicen<br>nuestros <em>pacientes</em></h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Llevaba años postergando ir al dentista por miedo. La Dra. Carla me hizo sentir cómoda desde el primer momento. Los brackets quedaron perfectos y el resultado superó todo lo que esperaba."</p>
+        <div class="test-author">
+          <div class="test-avatar">MG</div>
+          <div>
+            <div class="test-name">María González</div>
+            <div class="test-date">Montevideo · Ortodoncia</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:0.1s">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Llevo a mis dos hijos desde hace tres años. La atención es impecable, muy profesional y siempre puntual. Es el mejor consultorio dental que conocí en Montevideo, sin dudas."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:var(--gold)">PS</div>
+          <div>
+            <div class="test-name">Pablo Sosa</div>
+            <div class="test-date">Montevideo · Odontología familiar</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:0.15s">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"El blanqueamiento quedó increíble. Me explicó todo el proceso paso a paso y nunca sentí incomodidad. Ahora sonrío con una confianza que no tenía hace años. ¡Gracias, Dra. Carla!"</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#5C7A57">SR</div>
+          <div>
+            <div class="test-name">Sofía Rial</div>
+            <div class="test-date">Montevideo · Blanqueamiento</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:0.2s">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Me colocó un implante y el proceso fue mucho más simple de lo que imaginaba. Muy seria, muy prolija. El resultado es indistinguible de un diente natural. Excelente profesional."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#4A6FA5">JF</div>
+          <div>
+            <div class="test-name">Jorge Fernández</div>
+            <div class="test-date">Montevideo · Implante dental</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:0.25s">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Fui por una urgencia un sábado y me atendió enseguida. Muy amable y resolutiva. Desde ese día es mi dentista de cabecera. La recomiendo a toda mi familia y amigos sin dudarlo."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#8B5E3C">LM</div>
+          <div>
+            <div class="test-name">Laura Méndez</div>
+            <div class="test-date">Montevideo · Urgencia dental</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:0.3s">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Mi hija tenía mucho miedo al dentista y la Dra. Carla la trató con una paciencia y dulzura increíbles. Hoy va al consultorio sin ningún problema. Una profesional de diez puntos."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:#7A5C8B">AB</div>
+          <div>
+            <div class="test-name">Andrea Burgos</div>
+            <div class="test-date">Montevideo · Odontopediatría</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BARRA FLOTANTE ESTILO BUSHDIDSMILES -->
+<div class="float-bar" id="floatBar">
+  <div class="fb-inner">
+    <div class="fb-dot"></div>
+    <nav class="fb-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#sobre">Sobre mí</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#asistente">Asistente</a>
+      <a href="#ubicacion">Ubicación</a>
+    </nav>
+    <a href="#contacto" class="fb-cta">Pedir Turno</a>
+  </div>
+</div>
+
+<!-- ASISTENTE IA -->
+<section id="asistente" class="chat-section">
+  <div class="chat-inner">
+    <div>
+      <div class="chat-left-label">Asistente Virtual 24/7</div>
+      <h2 class="chat-left-title">Resolvé tus<br>dudas <em>ahora</em></h2>
+      <p class="chat-left-sub">Nuestro asistente inteligente responde tus preguntas al instante sobre servicios, horarios, precios y más.</p>
+      <div class="chat-topics">
+        <button class="chat-topic-btn" onclick="sendQ('¿Qué servicios ofrecés?')">🦷 &nbsp;¿Qué servicios ofrecés?</button>
+        <button class="chat-topic-btn" onclick="sendQ('¿Cuáles son los horarios?')">🕒 &nbsp;Horarios de atención</button>
+        <button class="chat-topic-btn" onclick="sendQ('¿Cuánto cuesta el blanqueamiento?')">✨ &nbsp;Precios y costos</button>
+        <button class="chat-topic-btn" onclick="sendQ('Quiero pedir un turno')">📅 &nbsp;Pedir un turno</button>
+        <button class="chat-topic-btn" onclick="sendQ('¿Dónde están ubicados?')">📍 &nbsp;Ubicación y acceso</button>
+      </div>
+    </div>
+    <div>
+      <div class="chat-widget">
+        <div class="chat-hdr">
+          <div class="chat-av">🦷</div>
+          <div class="chat-hdr-info">
+            <h4>Asistente · Dra. Carla Ruiz Díaz</h4>
+            <p><span class="dot-on"></span>En línea · Responde al instante</p>
+          </div>
+        </div>
+        <div class="chat-msgs" id="chatMsgs">
+          <div class="cmsg bot">
+            <div class="cbubble">¡Hola! 👋 Soy el asistente de la Dra. Carla Ruiz Díaz. ¿En qué puedo ayudarte hoy?</div>
+            <div class="ctime">Ahora</div>
+          </div>
+        </div>
+        <div class="chat-qr">
+          <button class="qrbtn" onclick="sendQ('¿Dónde están ubicados?')">📍 Dirección</button>
+          <button class="qrbtn" onclick="sendQ('¿Atienden urgencias?')">🚨 Urgencias</button>
+          <button class="qrbtn" onclick="sendQ('Quiero pedir un turno')">📅 Turno</button>
+        </div>
+        <div class="chat-inp-area">
+          <input class="chat-inp" id="chatInp" placeholder="Escribí tu pregunta..." onkeydown="if(event.key==='Enter')sendMsg()"/>
+          <button class="chat-snd" onclick="sendMsg()" aria-label="Enviar">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACION -->
+<section id="ubicacion" class="ubicacion">
+  <div class="ubicacion-inner">
+    <div class="reveal">
+      <div class="ub-label">Cómo llegarnos</div>
+      <h2 class="ub-title">Estamos en<br><em>Montevideo</em></h2>
+      <div class="ub-items">
+        <div class="ub-item">
+          <div class="ub-icon">📍</div>
+          <div>
+            <div class="ub-ilabel">Dirección</div>
+            <div class="ub-ival">Dr. Mario Cassinoni 1696<br>11800 Montevideo, Uruguay</div>
+          </div>
+        </div>
+        <div class="ub-item">
+          <div class="ub-icon">📞</div>
+          <div>
+            <div class="ub-ilabel">Teléfono</div>
+            <div class="ub-ival"><a href="tel:+598099296491">099 296 491</a></div>
+          </div>
+        </div>
+        <div class="ub-item">
+          <div class="ub-icon">🕒</div>
+          <div>
+            <div class="ub-ilabel">Horarios</div>
+            <div class="horario-rows">
+              <div class="hr-row"><span class="dia">Lunes – Viernes</span><span class="hrs">9:00 – 18:00</span></div>
+              <div class="hr-row"><span class="dia">Sábados</span><span class="hrs">9:00 – 13:00</span></div>
+              <div class="hr-row"><span class="dia">Domingos</span><span class="hrs" style="color:rgba(0,0,0,0.35)">Cerrado</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ub-item">
+          <div class="ub-icon">💬</div>
+          <div>
+            <div class="ub-ilabel">WhatsApp</div>
+            <div class="ub-ival"><a href="https://wa.me/598099296491" target="_blank">Escribir ahora →</a></div>
+          </div>
+        </div>
+      </div>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Dr.+Mario+Cassinoni+1696,+Montevideo,+Uruguay" target="_blank" class="btn-mapa">
+        🗺️ &nbsp;Cómo llegar — Google Maps
+      </a>
+    </div>
+    <iframe
+      class="mapa-frame reveal"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3272.5!2d-56.1724!3d-34.9058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959f80c8e1e78b5b%3A0x1!2sDr.+Mario+Cassinoni+1696%2C+Montevideo%2C+Uruguay!5e0!3m2!1ses!2suy!4v1700000000000"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Ubicación Dra. Carla Ruiz Díaz Montevideo">
+    </iframe>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="contacto">
+  <div class="contacto-inner">
+    <div class="contacto-grid">
+      <div class="reveal">
+        <div class="co-label">Reservar turno</div>
+        <h2 class="co-title">Agendá tu<br>cita <em>hoy</em></h2>
+        <p class="co-sub">Completá el formulario y te contactamos en breve con la confirmación de tu turno.</p>
+        <div class="co-contacts">
+          <a href="tel:+598099296491" class="co-contact-item">
+            <span class="co-ci-icon">📞</span>
+            <div>
+              <div class="co-ci-label">Teléfono</div>
+              <div class="co-ci-val">099 296 491</div>
+            </div>
+          </a>
+          <a href="https://wa.me/598099296491" target="_blank" class="co-contact-item">
+            <span class="co-ci-icon">💬</span>
+            <div>
+              <div class="co-ci-label">WhatsApp</div>
+              <div class="co-ci-val">Escribir ahora →</div>
+            </div>
+          </a>
+          <div class="co-contact-item" style="cursor:default">
+            <span class="co-ci-icon">📍</span>
+            <div>
+              <div class="co-ci-label">Dirección</div>
+              <div class="co-ci-val">Dr. Mario Cassinoni 1696, Montevideo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card reveal">
+        <h3>Solicitar turno</h3>
+        <div class="fg-row">
+          <div class="fg"><label>Nombre *</label><input id="fn" type="text" placeholder="Tu nombre"/></div>
+          <div class="fg"><label>Apellido *</label><input id="ln" type="text" placeholder="Tu apellido"/></div>
+        </div>
+        <div class="fg-row">
+          <div class="fg"><label>Teléfono *</label><input id="ph" type="tel" placeholder="099 000 000"/></div>
+          <div class="fg"><label>Email</label><input id="em" type="email" placeholder="tu@email.com"/></div>
+        </div>
+        <div class="fg">
+          <label>Servicio de interés *</label>
+          <select id="sv">
+            <option value="">Seleccioná un servicio...</option>
+            <option>Ortodoncia / Brackets</option>
+            <option>Blanqueamiento dental</option>
+            <option>Implantes dentales</option>
+            <option>Limpieza y control general</option>
+            <option>Urgencia dental</option>
+            <option>Odontología infantil</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="fg"><label>Mensaje (opcional)</label><textarea id="ms" placeholder="Contanos sobre tu consulta..."></textarea></div>
+        <button class="btn-form" onclick="submitForm()">Enviar por WhatsApp →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Dra. Carla Ruiz Díaz<span>Odontología · Montevideo, Uruguay</span></div>
+  <div class="footer-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#asistente">Asistente</a>
+    <a href="#ubicacion">Ubicación</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <p>© 2025 Dra. Carla Ruiz Díaz. Todos los derechos reservados.</p>
+</footer>
+
+<div class="modal-ov" id="modal">
+  <div class="modal-box">
+    <div class="modal-icon">✅</div>
+    <h3>¡Listo!</h3>
+    <p>Te redirigimos a WhatsApp con tu información pre-completada. La Dra. Carla te responderá en breve.</p>
+    <button class="modal-close" onclick="closeModal()">Perfecto, gracias</button>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
