@@ -1355,6 +1355,23 @@ kbd{font-family:var(--font-mono);font-size:10px;background:var(--surface);border
       <button class="btn btn-accent" id="save-profile-btn" style="margin-top:8px">Guardar perfil</button>
     </div>
     <div class="settings-section">
+      <h3>🤖 Asistente IA (Gemini)</h3>
+      <div class="form-group" style="margin-bottom:8px">
+        <label>API Key de Gemini</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input class="inp" type="password" id="set-gemini-key" placeholder="AIzaSy…" autocomplete="off" style="flex:1;font-family:var(--ff-mono,'monospace');letter-spacing:.04em"/>
+          <button class="btn btn-ghost" id="gemini-toggle-visibility" title="Mostrar/ocultar" style="padding:0 10px;font-size:1.1rem">👁</button>
+        </div>
+        <span style="font-size:.75rem;color:var(--muted);margin-top:4px;display:block">Obtená tu key gratis en <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--accent)">aistudio.google.com</a></span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-accent" id="save-gemini-btn">💾 Guardar key</button>
+        <button class="btn btn-ghost" id="test-gemini-btn">🧪 Probar conexión</button>
+        <button class="btn btn-danger" id="clear-gemini-btn" style="margin-left:auto">🗑 Eliminar key</button>
+      </div>
+      <div id="gemini-status" style="margin-top:8px;font-size:.8rem;min-height:1.4em"></div>
+    </div>
+    <div class="settings-section">
       <h3>Seguridad</h3>
       <button class="btn btn-ghost" id="change-pin-btn" style="width:100%">🔑 Cambiar PIN</button>
     </div>
@@ -1620,7 +1637,7 @@ const ACCOUNTS_KEY = 'tradelog_accounts_v1';
 const THEME_KEY = 'tradelog_theme_v1';
 const dataKey = userId => 'tradelog_data_' + userId;
 
-const GEMINI_KEY = '';
+/* GEMINI_KEY global removed — cada usuario guarda su key cifrada en S.geminiKey */
 const NOTION_TOKEN = '';
 const NOTION_PAGE_ID = '';
 
@@ -1661,7 +1678,8 @@ let S = {
   trades: [], assets: [], selectedId: null,
   tab: 'log', theme: 'oro-negro',
   chatHistory: [], chatOpen: false, sidebarOpen: true,
-  notes: '', portfolio: [], walletAddress: null
+  notes: '', portfolio: [], walletAddress: null,
+  geminiKey: ''
 };
 let PIN = '';
 let CURRENT_USER = null;
@@ -2313,12 +2331,13 @@ async function sendToNotion(content){
 }
 
 async function sendToAI(userMsg){
-  if (!GEMINI_KEY){ addChatMsg('ai','⚠️ El asistente no está configurado aún. Contactá al administrador.'); return; }
+  const activeKey = (S.geminiKey||'').trim();
+  if (!activeKey){ addChatMsg('ai','⚠️ Configurá tu API Key de Gemini en ⚙️ Configuración → Asistente IA.'); return; }
   addChatMsg('user', userMsg); showTyping();
   const context=buildTradeContext();
   const isNotionReq=/notion|exportar|enviar.*resumen/i.test(userMsg);
   try {
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_KEY}`,{
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeKey}`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
@@ -2487,6 +2506,58 @@ document.addEventListener('DOMContentLoaded', () => {
     if (idx!==-1){ accounts[idx].profile=profile; saveAccounts(accounts); CURRENT_USER.profile=profile; }
     saveState(); toast('Perfil guardado ✅','success');
   };
+  /* ── Gemini API Key ── */
+  function setGeminiStatus(msg, ok){
+    const el=$('gemini-status');
+    if(!el) return;
+    el.textContent=msg;
+    el.style.color=ok===true?'var(--up)':ok===false?'var(--down)':'var(--muted)';
+  }
+  async function testGeminiKey(key){
+    try{
+      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({contents:[{role:'user',parts:[{text:'Responde solo: OK'}]}],generationConfig:{maxOutputTokens:4}})
+      });
+      if(r.status===400){ const j=await r.json(); if(j?.error?.message?.includes('API_KEY_INVALID')) return {ok:false,msg:'❌ Key inválida'}; }
+      if(r.status===403) return {ok:false,msg:'❌ Key inválida o sin permisos'};
+      if(!r.ok) return {ok:false,msg:`❌ Error ${r.status}`};
+      return {ok:true,msg:'✅ Conexión exitosa — key válida'};
+    }catch(e){ return {ok:false,msg:'❌ Error de red: '+e.message}; }
+  }
+  /* Poblar input con key actual al abrir settings */
+  if($('set-gemini-key')) $('set-gemini-key').value=S.geminiKey||'';
+  $('gemini-toggle-visibility').onclick=()=>{
+    const inp=$('set-gemini-key');
+    inp.type=inp.type==='password'?'text':'password';
+  };
+  $('save-gemini-btn').onclick=async()=>{
+    const key=($('set-gemini-key').value||'').trim();
+    if(!key){ setGeminiStatus('Ingresá una key primero.',null); return; }
+    setGeminiStatus('Verificando…',null);
+    $('save-gemini-btn').disabled=true; $('test-gemini-btn').disabled=true;
+    const {ok,msg}=await testGeminiKey(key);
+    if(ok){ S.geminiKey=key; await saveState(); setGeminiStatus('💾 Guardada. '+msg,true); toast('Gemini configurado ✅','success'); }
+    else setGeminiStatus(msg,false);
+    $('save-gemini-btn').disabled=false; $('test-gemini-btn').disabled=false;
+  };
+  $('test-gemini-btn').onclick=async()=>{
+    const key=($('set-gemini-key').value||'').trim()||S.geminiKey||'';
+    if(!key){ setGeminiStatus('No hay key para probar.',null); return; }
+    setGeminiStatus('Probando…',null);
+    $('test-gemini-btn').disabled=true;
+    const {ok,msg}=await testGeminiKey(key);
+    setGeminiStatus(msg,ok);
+    $('test-gemini-btn').disabled=false;
+  };
+  $('clear-gemini-btn').onclick=async()=>{
+    if(!confirm('¿Eliminar tu API Key de Gemini?')) return;
+    S.geminiKey=''; $('set-gemini-key').value='';
+    await saveState(); setGeminiStatus('Key eliminada.',null); toast('Key eliminada','info');
+  };
+  /* Restaurar key en input cuando se abre el modal */
+  $('settings-btn').addEventListener('click',()=>{ if($('set-gemini-key')) $('set-gemini-key').value=S.geminiKey||''; $('gemini-status').textContent=''; },true);
+
   $('change-pin-btn').onclick=changePin;
   $('export-all-btn').onclick=exportAllData;
   $('import-all-btn').onclick=importAllData;
