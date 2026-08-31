@@ -848,7 +848,7 @@ kbd{font-family:var(--font-mono);font-size:10px;background:var(--surface);border
 
   <nav id="landing-nav" role="navigation" aria-label="Principal">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">TR<span class="bag-svg" aria-hidden="true"><svg width="22" height="28" viewBox="0 0 28 36"><ellipse cx="14" cy="6.5" rx="6" ry="3.5" fill="#C9A84C"/><path d="M9 9 C9 6 11 5 14 5 C17 5 19 6 19 9 L19 14 C19 16 17 17 14 17 C11 17 9 16 9 14 Z" fill="#C9A84C"/><ellipse cx="14" cy="26" rx="13" ry="10" fill="#C9A84C"/><text x="14" y="31" text-anchor="middle" font-size="12" font-weight="900" fill="#08080A" font-family="Arial">$</text></svg></span>DE MANAGER</a>
+      <a href="#" class="nav-logo">TRADER MANAGER</a>
       <ul class="nav-links">
         <li><a href="#pitch">Producto</a></li>
         <li><a href="#features">Características</a></li>
@@ -1013,7 +1013,7 @@ kbd{font-family:var(--font-mono);font-size:10px;background:var(--surface);border
 
   <footer>
     <div class="foot-inner">
-      <span class="foot-logo">TR<span class="bag-svg" aria-hidden="true"><svg width="17" height="22" viewBox="0 0 28 36"><ellipse cx="14" cy="6.5" rx="6" ry="3.5" fill="#C9A84C"/><path d="M9 9 C9 6 11 5 14 5 C17 5 19 6 19 9 L19 14 C19 16 17 17 14 17 C11 17 9 16 9 14 Z" fill="#C9A84C"/><ellipse cx="14" cy="26" rx="13" ry="10" fill="#C9A84C"/><text x="14" y="31" text-anchor="middle" font-size="12" font-weight="900" fill="#08080A" font-family="Arial">$</text></svg></span>DE MANAGER</span>
+      <span class="foot-logo">TRADER MANAGER</span>
       <ul class="foot-links">
         <li><a href="#">Privacidad</a></li>
         <li><a href="#">Términos</a></li>
@@ -1359,7 +1359,7 @@ kbd{font-family:var(--font-mono);font-size:10px;background:var(--surface);border
       <div class="form-group" style="margin-bottom:8px">
         <label>API Key de Gemini</label>
         <div style="display:flex;gap:8px;align-items:center">
-          <input class="inp" type="password" id="set-gemini-key" placeholder="AIzaSy…" autocomplete="off" style="flex:1;font-family:var(--font-mono);letter-spacing:.04em"/>
+          <input class="inp" type="password" id="set-gemini-key" placeholder="AIzaSy…" autocomplete="off" style="flex:1;font-family:var(--ff-mono,'monospace');letter-spacing:.04em"/>
           <button class="btn btn-ghost" id="gemini-toggle-visibility" title="Mostrar/ocultar" style="padding:0 10px;font-size:1.1rem">👁</button>
         </div>
         <span style="font-size:.75rem;color:var(--muted);margin-top:4px;display:block">Obtená tu key gratis en <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--accent)">aistudio.google.com</a></span>
@@ -2337,7 +2337,7 @@ async function sendToAI(userMsg){
   const context=buildTradeContext();
   const isNotionReq=/notion|exportar|enviar.*resumen/i.test(userMsg);
   try {
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${activeKey}`,{
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${activeKey}`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
@@ -2346,11 +2346,6 @@ async function sendToAI(userMsg){
       })
     });
     const json=await res.json();
-    if (!res.ok){
-      const errMsg=json?.error?.message||`Error ${res.status}`;
-      removeTyping(); addChatMsg('ai', `⚠️ Error de Gemini: ${errMsg}`);
-      saveState(); return;
-    }
     const reply=json?.candidates?.[0]?.content?.parts?.[0]?.text||'Sin respuesta del asistente.';
     removeTyping(); addChatMsg('ai', reply);
     if (isNotionReq && NOTION_TOKEN) await sendToNotion(reply);
@@ -2516,18 +2511,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const el=$('gemini-status');
     if(!el) return;
     el.textContent=msg;
-    el.style.color=ok===true?'var(--win)':ok===false?'var(--loss)':'var(--muted)';
+    el.style.color=ok===true?'var(--up)':ok===false?'var(--down)':'var(--muted)';
   }
   async function testGeminiKey(key){
     try{
-      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`,{
+      const r=await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${key}`,{
         method:'POST', headers:{'Content-Type':'application/json'},
         body:JSON.stringify({contents:[{role:'user',parts:[{text:'Responde solo: OK'}]}],generationConfig:{maxOutputTokens:4}})
       });
       if(r.status===400){ const j=await r.json(); if(j?.error?.message?.includes('API_KEY_INVALID')) return {ok:false,msg:'❌ Key inválida'}; }
       if(r.status===403) return {ok:false,msg:'❌ Key inválida o sin permisos'};
-      if(r.status===404) return {ok:false,msg:'❌ Modelo no encontrado (404) — revisá el endpoint/modelo'};
-      if(r.status===429) return {ok:false,msg:'❌ Límite de cuota excedido (429)'};
       if(!r.ok) return {ok:false,msg:`❌ Error ${r.status}`};
       return {ok:true,msg:'✅ Conexión exitosa — key válida'};
     }catch(e){ return {ok:false,msg:'❌ Error de red: '+e.message}; }
@@ -2562,11 +2555,8 @@ document.addEventListener('DOMContentLoaded', () => {
     S.geminiKey=''; $('set-gemini-key').value='';
     await saveState(); setGeminiStatus('Key eliminada.',null); toast('Key eliminada','info');
   };
-  /* Restaurar key en input cuando se abre el modal
-     (bug corregido: el id era 'settings-btn', que no existe en el DOM —
-     el botón real es #nav-settings. Como addEventListener fallaba sobre
-     null, todos los bindings siguientes del bloque quedaban sin registrar). */
-  $('nav-settings').addEventListener('click',()=>{ if($('set-gemini-key')) $('set-gemini-key').value=S.geminiKey||''; $('gemini-status').textContent=''; },true);
+  /* Restaurar key en input cuando se abre el modal */
+  $('settings-btn').addEventListener('click',()=>{ if($('set-gemini-key')) $('set-gemini-key').value=S.geminiKey||''; $('gemini-status').textContent=''; },true);
 
   $('change-pin-btn').onclick=changePin;
   $('export-all-btn').onclick=exportAllData;
